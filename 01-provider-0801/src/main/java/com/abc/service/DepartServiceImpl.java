@@ -39,11 +39,13 @@ public class DepartServiceImpl implements DepartService{
 
     @Override
     public Depart getDepartById(int id) {
+        Depart depart = new Depart();
         if(departRepository.existsById(id)){
-            departRepository.getById(id);
-            return departRepository.getById(id);
+            Depart dep = departRepository.getById(id);
+            depart.setId(dep.getId());
+            depart.setName(dep.getName());
         }
-        return new Depart();
+        return depart;
     }
 
     @Override
