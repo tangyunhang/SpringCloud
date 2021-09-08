@@ -30,6 +30,7 @@ public class DepartController {
     }
 
     @GetMapping("/get/{id}")
+    @ResponseBody
     public Depart getHandler(@PathVariable("id") Integer id){
         return departService.getDepartById(id);
     }
