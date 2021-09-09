@@ -11,3 +11,10 @@ eureka:
       #当前Eureka Server 对外暴露的服务地址
       #defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka
       defaultZone: http://localhost:8000/eureka
+  server:
+#    设置自我保护机制的阈值，默认0.85
+    renewal-percent-threshold: 0.75
+#    关闭自我保护机制，默认ture
+    enable-self-preservation: true
+#    server剔除不可用服务时间,单位：ms
+    eviction-interval-timer-in-ms: 4000
