@@ -26,9 +26,27 @@ spring:
   application:
     name: abcmsc-provider-depart
 eureka:
-  service-url:
-    #指定当前client所要连接的 Eureka server
-    defaultZone: http://localhost:8000/eureka
+  client:
+    service-url:
+      #指定当前client所要连接的 Eureka server
+      defaultZone: http://localhost:8000/eureka
+
+#region与zone -》1：n
+#zone与ureka -》1：n
+#复杂配置
+#eureka:
+#  client:
+##    指定区域名称
+#    region: tyh
+##    指定区域中所包含的地带zone
+#    availability-zones:
+#      tyh: tyh01,tyh02
+##      指定各个地带zone中所包含的Eureka server地址
+#    service-url:
+#      tyh01: http://localhost:8000/eureka
+#      tyh02: http://localhost:8000/eureka
+##      指定要连接的注册中心所在区域
+#    fetch-remote-regions-registry: tyh
 
 #配置日志
 logging:
@@ -47,3 +65,8 @@ logging:
     org.hibernate.type.descriptor.sql.BasicExtrator: trace
     #控制自己代码在运行时的日志级别
     com.abc.msc: debug
+#    actuator
+info:
+  app:
+    author: "tangyunahng"
+    date: "2021.09.09"

@@ -3,6 +3,8 @@ package com.abc.controller;
 import com.abc.bean.Depart;
 import com.abc.service.DepartService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,6 +15,9 @@ public class DepartController {
 
     @Autowired
     private DepartService departService;
+    //声明服务发现客户端
+    @Autowired
+    private DiscoveryClient discoveryClient;
 
     @PostMapping("/save")
     public boolean saveHandler(@RequestBody Depart depart){
@@ -38,5 +43,24 @@ public class DepartController {
     @GetMapping("/list")
     public List<Depart> listHandler(){
         return departService.listAllDeparts();
+    }
+
+    @GetMapping("/discovery")
+    public List<String> discoveryHandler(){
+        List<String> services = discoveryClient.getServices();
+        services.forEach(name->{
+            //获取当前遍历微服务名称的所有提供者
+            List<ServiceInstance> instances = discoveryClient.getInstances(name);
+            instances.forEach(instance->{
+                //当前提供者唯一标识
+                String instanceId = instance.getInstanceId();
+                String serviceId = instance.getServiceId();
+                String host = instance.getHost();
+                System.out.println("serviceId="+serviceId);
+                System.out.println("instanceId="+instanceId);
+                System.out.println("host="+host);
+            });
+        });
+        return services;
     }
 }
