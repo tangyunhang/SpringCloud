@@ -1,5 +1,5 @@
 server:
-  port: 8000
+  port: 8100
 
 eureka:
   instance:
@@ -10,7 +10,8 @@ eureka:
     service-url:
       #当前Eureka Server 对外暴露的服务地址
       #defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka
-      defaultZone: http://localhost:8000/eureka
+      #defaultZone: http://localhost:8100/eureka,http://localhost:8100/eureka,http://localhost:8100/eureka
+      defaultZone: http://eureka8100.com:8100/eureka,http://eureka8200.com:8200/eureka,http://eureka8300.com:8300/eureka
 #  server:
 ##    设置自我保护机制的阈值，默认0.85
 #    renewal-percent-threshold: 0.75
