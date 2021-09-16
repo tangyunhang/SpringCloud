@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.abc</groupId>
-    <artifactId>04-dashboard-9000</artifactId>
+    <artifactId>00-dashboard-9000</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <properties>
         <java.version>1.8</java.version>
