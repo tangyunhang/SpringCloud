@@ -1,0 +1,25 @@
+server:
+  port: 9000
+spring:
+  #指定微服务名称
+  application:
+    name: abcmsc-dashboard-depart
+eureka:
+  client:
+    service-url:
+      #指定当前client所要连接的 Eureka server
+      defaultZone: http://localhost:8000/eureka
+info:
+  app:
+    author: "tangyunahng"
+    date: "2021.09.09"
+
+#开启所有监控终端
+management:
+  endpoints:
+    web:
+      exposure:
+        include:  "*"
+hystrix:
+  dashboard:
+    proxy-stream-allow-list: "localhost"
