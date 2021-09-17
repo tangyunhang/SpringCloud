@@ -1,0 +1,33 @@
+server:
+  port: 8300
+spring:
+  #指定微服务名称
+  application:
+    name: abcmsc-hystrix-turbine
+eureka:
+  client:
+    service-url:
+      #指定当前client所要连接的 Eureka server
+      defaultZone: http://localhost:8000/eureka
+info:
+  app:
+    author: "tangyunahng"
+    date: "2021.09.09"
+
+#开启所有监控终端
+management:
+  endpoints:
+    web:
+      exposure:
+        include:  "*"
+hystrix:
+  dashboard:
+    proxy-stream-allow-list: "localhost"
+#配置要监控的微服务名称
+turbine:
+  app-config: abcmsc-consumer-cluster2,abcmsc-consumer-cluster3,abcmsc-consumer-cluster4,abcmsc-consumer-cluster5
+  aggregator:
+#    指定要监控的微服务组，默认default
+    cluster-config: group1,group2
+#    指定要监控的微服务组名称，默认组名称为'default'
+  cluster-name-expression: metadata['cluster']
