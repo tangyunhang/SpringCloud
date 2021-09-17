@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.abc</groupId>
-    <artifactId>04-consumer-turbine-clinet-g1-8180</artifactId>
+    <artifactId>04-consumer-turbine-clinet-8180</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <properties>
         <java.version>1.8</java.version>
