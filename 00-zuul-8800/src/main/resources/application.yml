@@ -1,0 +1,27 @@
+server:
+  port: 8800
+spring:
+  #指定微服务名称
+  application:
+    name: abcmsc-zuul-depart
+eureka:
+  client:
+    service-url:
+      #指定当前client所要连接的 Eureka server
+      defaultZone: http://localhost:8000/eureka
+zuul:
+  routes:
+#    *为通配符
+#    /**可以匹配0到多级路径
+#    /*只能匹配多级路径
+#    /？只能匹配一级路径，且路径只包含一个字符
+#    指定微服务的路由规则
+    abcmsc-zuul-consumer-8080: /abc8080/**
+    abcmsc-zuul-consumer-8090: /abc8090/**
+#    屏蔽指定微服务名称
+#  ignored-services: abcmsc-zuul-consumer-8080
+#    屏蔽所有微服务名称
+  ignored-services: "*"
+#  屏蔽指定URI
+  ignored-patterns: /**/list/**
+  prefix: /abc
