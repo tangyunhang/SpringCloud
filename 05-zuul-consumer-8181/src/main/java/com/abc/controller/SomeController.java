@@ -4,10 +4,10 @@ import com.abc.bean.Depart;
 import com.abc.service.DepartService;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -15,6 +15,9 @@ import java.util.List;
 public class SomeController {
     @Autowired
     private DepartService service;
+
+    @Value("${server.port}")
+    private Integer port;
     @PostMapping("/save")
     public boolean saveHandler(@RequestBody Depart depart){
         return service.saveDepart(depart);
@@ -39,21 +42,15 @@ public class SomeController {
     //定义服务降级方法，响应给客户端的备选方案
     public Depart getHystrixHandler(@PathVariable("id") Integer id, HttpServletRequest request){
         System.out.println("token="+request.getHeader("token"));
-        System.out.println("tang="+request.getHeader("tang"));
+        System.out.println("Set-Cookie="+request.getHeader("Set-Cookie"));
         Depart depart = new Depart();
         depart.setId(3);
-        depart.setName("no depart method -8080!");
+        depart.setName("no depart method " + port);
         return depart;
     }
 
-    @HystrixCommand(fallbackMethod = "listHandleHystrix")
     @GetMapping("/list")
     public List<Depart> listHandler(){
         return service.listAllDeparts();
-    }
-    public List<Depart> listHandleHystrix(){
-        ArrayList<Depart> departs = new ArrayList<>();
-        departs.add(new Depart(0,"no this depart-8080"));
-        return departs;
     }
 }
