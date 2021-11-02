@@ -1,0 +1,14 @@
+server:
+  port: 8800
+spring:
+  #指定微服务名称
+  application:
+    name: abcmsc-zuul-gray-depart
+eureka:
+  client:
+    service-url:
+      #指定当前client所要连接的 Eureka server
+      defaultZone: http://localhost:8000/eureka
+zuul:
+  routes:
+    abcmsc-zuul-consumer-depart: /abc012/**

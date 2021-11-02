@@ -1,0 +1,30 @@
+server:
+  port: 8800
+spring:
+  #指定微服务名称
+  application:
+    name: abcmsc-zuul-ratelimit-depart
+eureka:
+  client:
+    service-url:
+      #指定当前client所要连接的 Eureka server
+      defaultZone: http://localhost:8000/eureka
+zuul:
+  routes:
+#    *为通配符
+#    /**可以匹配0到多级路径
+#    /*只能匹配多级路径
+#    /？只能匹配一级路径，且路径只包含一个字符
+#    指定微服务的路由规则
+    abcmsc-zuul-consumer-8080: /abc8080/**
+    abcmsc-zuul-consumer-8090: /abc8090/**
+#    abcmsc-zuul-consumer-depart: /abc012/**
+  ratelimit:
+    enabled: true #开启限流
+#    设置限流策略
+#    在一个单位时间窗口内，用户，ip，url数都不能超过3个
+    default-policy:
+      quota: 1 #指定限流的时间窗数量
+      limit: 3 #在单位时间内启用限流的限定值
+      type: user,origin,url #指定限流查验类型
+      refresh-interval: 3 #指定单位时间窗大小，单位秒
