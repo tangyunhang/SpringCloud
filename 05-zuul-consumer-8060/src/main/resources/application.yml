@@ -1,9 +1,9 @@
 server:
-  port: 8080
+  port: 8060
 spring:
   #指定微服务名称
   application:
-    name: abcmsc-zuul-consumer-8080
+    name: abcmsc-zuul-consumer-8060
 eureka:
   client:
     service-url:
@@ -27,6 +27,7 @@ management:
 hystrix:
   dashboard:
     proxy-stream-allow-list: "localhost"
+
 # 设置服务熔断时限
 #  Feign 连接提供者、对于提供者的调用均可设置超时时限。
 feign:

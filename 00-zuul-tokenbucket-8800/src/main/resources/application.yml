@@ -3,7 +3,7 @@ server:
 spring:
   #指定微服务名称
   application:
-    name: abcmsc-zuul-depart
+    name: abcmsc-zuul-filter-depart
 eureka:
   client:
     service-url:
@@ -18,12 +18,4 @@ zuul:
 #    指定微服务的路由规则
     abcmsc-zuul-consumer-8080: /abc8080/**
     abcmsc-zuul-consumer-8090: /abc8090/**
-#    屏蔽指定微服务名称
-#  ignored-services: abcmsc-zuul-consumer-8080
-#    屏蔽所有微服务名称
-  ignored-services: "*"
-#  屏蔽指定URI
-
-#  ignored-patterns: /**/list/**
-  prefix: /abc
-  sensitive-headers: token
+#    abcmsc-zuul-consumer-depart: /abc012/**

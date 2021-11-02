@@ -3,7 +3,7 @@ server:
 spring:
   #指定微服务名称
   application:
-    name: abcmsc-zuul-depart
+    name: abcmsc-zuul-ratelimit-depart
 eureka:
   client:
     service-url:
@@ -18,12 +18,13 @@ zuul:
 #    指定微服务的路由规则
     abcmsc-zuul-consumer-8080: /abc8080/**
     abcmsc-zuul-consumer-8090: /abc8090/**
-#    屏蔽指定微服务名称
-#  ignored-services: abcmsc-zuul-consumer-8080
-#    屏蔽所有微服务名称
-  ignored-services: "*"
-#  屏蔽指定URI
-
-#  ignored-patterns: /**/list/**
-  prefix: /abc
-  sensitive-headers: token
+#    abcmsc-zuul-consumer-depart: /abc012/**
+  ratelimit:
+    enabled: true #开启限流
+#    设置限流策略
+#    在一个单位时间窗口内，用户，ip，url数都不能超过3个
+    default-policy:
+      quota: 1 #指定限流的时间窗数量
+      limit: 3 #在单位时间内启用限流的限定值
+      type: user,origin,url #指定限流查验类型
+      refresh-interval: 3 #指定单位时间窗大小，单位秒

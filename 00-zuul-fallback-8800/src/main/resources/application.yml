@@ -3,7 +3,7 @@ server:
 spring:
   #指定微服务名称
   application:
-    name: abcmsc-zuul-depart
+    name: abcmsc-zuul-fallback-depart
 eureka:
   client:
     service-url:
@@ -16,14 +16,15 @@ zuul:
 #    /*只能匹配多级路径
 #    /？只能匹配一级路径，且路径只包含一个字符
 #    指定微服务的路由规则
-    abcmsc-zuul-consumer-8080: /abc8080/**
-    abcmsc-zuul-consumer-8090: /abc8090/**
+#    abcmsc-zuul-consumer-8060: /abc8060/**
+#    abcmsc-zuul-consumer-8090: /abc8090/**
+    abcmsc-zuul-consumer-depart: /abc012/**
 #    屏蔽指定微服务名称
 #  ignored-services: abcmsc-zuul-consumer-8080
 #    屏蔽所有微服务名称
   ignored-services: "*"
 #  屏蔽指定URI
-
 #  ignored-patterns: /**/list/**
   prefix: /abc
+#  屏蔽掉指定的敏感头信息，其会将原来默认的cookie，SetCookie,Authorization敏感信息放开
   sensitive-headers: token
