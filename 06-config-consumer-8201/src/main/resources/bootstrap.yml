@@ -1,0 +1,16 @@
+server:
+  port: 8201
+spring:
+  cloud:
+    config:
+#      指定configserver地址
+#      uri: http://configserver.com:9000，http://configserver.com:7000
+      uri: http://configserver.com:7000
+#      指定要访问的远程库分支
+      label: master
+#      指定要从远程库读取的配置文件地址，无拓展名
+      name: application-consumer-config
+#      环境
+      profile: dev
+  main:
+    allow-bean-definition-overriding: true
