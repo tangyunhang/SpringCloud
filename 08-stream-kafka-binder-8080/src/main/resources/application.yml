@@ -1,0 +1,45 @@
+server:
+  port: 8080
+spring:
+  #指定微服务名称
+  application:
+    name: abcmsc-stream-kafka
+  cloud:
+    stream:
+      kafka:
+        binder:
+#          指定连接的kafka集群
+          brokers: localhost:9193,localhost:9194,localhost:9195
+#          指定是否自动创建主题
+          auto-alter-topics: true
+      bindings:
+#        指定要绑定的输出管道，及要输出到管道的消息主题和类型
+        output:
+          destination: persons
+          content-type: text/plain
+        output2:
+          destination: tang
+          content-type: text/plain
+
+        input:
+          destination: tang
+eureka:
+  client:
+    service-url:
+      #指定当前client所要连接的 Eureka server
+      defaultZone: http://localhost:8000/eureka
+info:
+  app:
+    author: "tangyunahng"
+    date: "2021.09.09"
+
+#开启所有监控终端
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+#  开启shutdown监控终端
+#  endpoint:
+#    shutdown:
+#      enabled: true
